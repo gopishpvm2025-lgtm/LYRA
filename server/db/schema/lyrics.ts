@@ -1,0 +1,23 @@
+
+import { jsonb, pgTable, text, uniqueIndex } from 'drizzle-orm/pg-core';
+import { sql, type InferSelectModel, type InferInsertModel } from 'drizzle-orm';
+import { v7 as uuidv7 } from 'uuid';
+import { tracks } from './tracks'; // For foreign key reference
+
+export const lyrics = pgTable('lyrics', {
+  lyricsId: text('lyrics_id').primaryKey().$defaultFn(() => uuidv7()),
+  trackId: text('track_id').notNull().references(() => tracks.trackId, { onDelete: 'cascade' }),
+  lyricsJson: jsonb('lyrics_json').$type<Array<{ time: string; text: string }>>(),
+  source: text('source'),
+  llmModelUsed: text('llm_model_used'),
+  rawLlmOutput: text('raw_llm_output'),
+  createdAt: text('created_at').$defaultFn(() => new Date().toISOString()).notNull(),
+  updatedAt: text('updated_at').$defaultFn(() => new Date().toISOString()).notNull(),
+}, (table) => {
+  return {
+    trackIdx: uniqueIndex('lyrics_track_idx').on(table.trackId),
+  };
+});
+
+export type Lyrics = InferSelectModel<typeof lyrics>;
+export type NewLyrics = InferInsertModel<typeof lyrics>;

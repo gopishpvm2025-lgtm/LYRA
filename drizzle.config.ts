@@ -1,19 +1,10 @@
-import type { Config } from 'drizzle-kit';
-import * as dotenv from 'dotenv';
+import { defineConfig } from 'drizzle-kit';
 
-dotenv.config({ path: '.env' }); // Load .env file
-
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is required.');
-}
-
-export default {
-  schema: './server/db/schema/index.ts', // Path to your schema file
-  out: './server/db/migrations', // Directory for migrations
-  dialect: 'sqlite',
-  dbCredentials: {
-    url: process.env.DATABASE_URL,
-  },
+export default defineConfig({
+  dialect: 'postgresql',
+  schema: './server/db/schema/index.ts',
+  // Netlify applies migrations from this directory automatically on deploy.
+  out: 'netlify/database/migrations',
   verbose: true,
   strict: true,
-} satisfies Config;
+});
