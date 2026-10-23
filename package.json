@@ -33,6 +33,8 @@
     "evals:transcription": "node --import tsx evals/compare-transcription.ts"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.6",
+    "@netlify/database": "^2.0.1",
     "@nuxt/content": "3.5.1",
     "@nuxt/fonts": "0.11.2",
     "@nuxt/icon": "1.12.0",
@@ -46,7 +48,7 @@
     "@unhead/vue": "^2.0.3",
     "better-sqlite3": "^11.9.1",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.43.1",
+    "drizzle-orm": "1.0.0-beta.22",
     "h3": "^1.15.3",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.6.1",
@@ -79,7 +81,7 @@
     "@vue/tsconfig": "^0.7.0",
     "bun-types": "^1.2.16",
     "daisyui": "^5.0.35",
-    "drizzle-kit": "^0.31.1",
+    "drizzle-kit": "1.0.0-beta.22",
     "evalite": "0.16.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",

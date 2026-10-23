@@ -43,10 +43,8 @@ export default defineNuxtConfig({
     clientBundle: { scan: true },
   },
   modules: [
-    "@nuxt/content",
     "@nuxt/icon",
     "@nuxt/scripts",
-    "@nuxt/test-utils",
     "@pinia/nuxt", // Add Pinia module
   ],
   runtimeConfig: {
@@ -72,6 +70,10 @@ export default defineNuxtConfig({
     embeddingTimeoutMs: "300000",
     embeddingMaxTracks: "2000",
     embeddingDimensions: "256",
+  },
+  nitro: {
+    // Netlify Functions run the API; audio and artwork live in Netlify Blobs.
+    preset: "netlify",
   },
   vite: {
     plugins: [tailwindcss()],

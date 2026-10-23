@@ -1,0 +1,14 @@
+
+import { pgTable, text } from 'drizzle-orm/pg-core';
+import { sql, type InferSelectModel, type InferInsertModel } from 'drizzle-orm';
+import { v7 as uuidv7 } from 'uuid';
+
+export const genres = pgTable('genres', {
+  genreId: text('genre_id').primaryKey().$defaultFn(() => uuidv7()),
+  name: text('name').notNull().unique(),
+  createdAt: text('created_at').$defaultFn(() => new Date().toISOString()).notNull(),
+  updatedAt: text('updated_at').$defaultFn(() => new Date().toISOString()).notNull(),
+});
+
+export type Genre = InferSelectModel<typeof genres>;
+export type NewGenre = InferInsertModel<typeof genres>;
